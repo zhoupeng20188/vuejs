@@ -1,10 +1,39 @@
-<div id="app">{{message}}</div>
+<div id="app">
+    {{message}} <br>
+    <ul>
+        <li v-for="item in mv">{{item}}</li>
+    </ul>
+    <h2>当前计数{{cnt}}</h2>
+    <!-- <button v-on:click="cnt++">+</button>
+    <button v-on:click="cnt--">-</button> -->
+    <button v-on:click="add">+</button>
+    <!-- @click为语法糖，就是一些简写而已 -->
+    <button @click="sub">-</button>
+</div>
 <script src="vue.js"></script>
 <script>
-new Vue({
-    el: app,
+const vue = new Vue({
+    el: "#app",
     data: {
-        message:"hello,vuejs!"
+        message:"hello,vuejs!",
+        mv:['aa','bb'],
+        cnt:0
+    },
+    methods:{
+        add: function(){
+            this.cnt++;
+            console.log('add run');
+        },
+        sub:function(){
+            this.cnt--;
+            console.log('add run');
+        }
+    },
+    created:function(){
+        console.log("created");
+    },
+    mounted:function(){
+        console.log("mounted");
     }
 })
 </script>
