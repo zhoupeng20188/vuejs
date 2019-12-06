@@ -1,7 +1,44 @@
-<div id="app">
+<head>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        .active {
+            color:red;
+        }
+    </style>
+</head>
+<!-- v-cloak当vue解析完后再显示 -->
+<div id="app" v-cloak>
     {{message}} <br>
+    <h2>{{firstName + lastName}}</h2>
+    <h2>{{firstName + ' ' + lastName}}</h2>
+    <!-- v-once只渲染一次，之后修改后不改变此值 -->
+    <h2 v-once>{{firstName}} {{lastName}}</h2>
+    <!-- v-pre原封不动显示 -->
+    <h2 v-pre>{{message}}</h2>
+    <h2 v-html='url'></h2>
+    <!-- v-bind动态绑定属性 -->
+    <img v-bind:src="imgUrl" alt="">
+    <!-- v-bind的语法糖 -->
+    <img :src="imgUrl" alt="">
+    <!-- 绑定对象值 -->
+    <h2 class="title" :class="{active:isActive, line:isLine}">{{message}}</h2>
+    <h2 class="title" :class="{active:isActive}">{{message}}</h2>
+    <!-- 绑定方法 -->
+    <h2 class="title" :class="getClasses()">{{message}}</h2>
+    <!-- 数组语法 -->
+    <h2 :class="[active,line]"></h2>
+    <button @click="changeColor">变颜色</button>
     <ul>
-        <li v-for="item in mv">{{item}}</li>
+        <!-- 作业，第一个初始红色，其它黑色，之后点击第二个之后的元素变红色 -->
+        <li v-for="(item, i) in mv">{{i}}-
+            <!-- <span :class="getItemColor(i)" @click="itemClick(i)">{{item}}</span> -->
+            <!-- <span :class="{active:forData[i]}" @click="itemClick(i)">{{item}}</span> -->
+            <!-- <span :class="{active:item + i }" @click="itemClick(i)">{{item}}</span> -->
+            <span :class="{active:selected == i}" @click="itemClick(i)">{{item}}</span>
+            
+        </li>
     </ul>
     <h2>当前计数{{cnt}}</h2>
     <!-- <button v-on:click="cnt++">+</button>
@@ -16,8 +53,21 @@ const vue = new Vue({
     el: "#app",
     data: {
         message:"hello,vuejs!",
-        mv:['aa','bb'],
-        cnt:0
+        mv:['aa','bb','cc'],
+        cnt:0,
+        firstName: "Kobe",
+        lastName: "Bryant",
+        url: "<a href='http://www.baidu.com'>百度一下</a>",
+        active: "active",
+        line: "line",
+        isActive: "true",
+        isLine: "true",
+        imgUrl: "https://dss2.bdstatic.com/6Ot1bjeh1BF3odCf/it/u=1846417382,2147438232&fm=74&app=80&f=PNG&size=f121,90?sec=1880279984&t=b7643afd84feb667ef0029b8ab9bfea0",
+        forData: [true,false,false],
+        item0:true,
+        itme1:false,
+        item2:false,
+        selected:0
     },
     methods:{
         add: function(){
@@ -27,9 +77,34 @@ const vue = new Vue({
         sub:function(){
             this.cnt--;
             console.log('add run');
+        },
+        changeColor:function(){
+            this.isActive = !this.isActive;
+        },
+        getClasses:function(){
+            return {active:this.isActive, line:this.isLine};
+        },
+        getItemColor:function(i){
+            // flag = false;
+            // if(i==0){
+            //     flag = true;
+            // } else {
+            //     flag = this.forData[i];
+            // }
+            return {active:this.forData[i]};
+        },
+        itemClick:function(i){
+            // if(i !=0 ){
+                // this.forData[i] = "true";
+                this.selected = i;
+            // }
         }
     },
+    beforeCreate:function(){
+        console.log("beforeCreated");
+    },
     created:function(){
+        // 一般在这里请求数据
         console.log("created");
     },
     mounted:function(){
