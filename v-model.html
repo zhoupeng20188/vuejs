@@ -1,0 +1,48 @@
+<div id="app">
+    <input type="text" v-model="message">
+    {{message}} <br>
+    <!-- v-model.lazy当按下回车或失去焦点时才会绑定 -->
+    <input type="text" v-model.lazy="messageLazy">
+    {{messageLazy}} <br>
+    <!-- 修饰符number -->
+    <input type="number" v-model.number="age">
+    {{age}} {{typeof age}} <br>
+    <!-- 修饰符trim -->
+    <input type="text" v-model.trim="messageTrim">
+    {{messageTrim}} <br>
+    <input type="radio" v-model="sex" value="0">男
+    <input type="radio" v-model="sex" value="1">女
+    <br>
+    {{sex}} <br>
+    <input type="checkbox" value="true" v-model="isAgree">同意协议
+    <br><button :disabled="!isAgree">下一步</button>
+    <br>
+    <input type="checkbox" v-model="hobbies" value="篮球">篮球
+    <input type="checkbox" v-model="hobbies" value="足球">足球
+    <input type="checkbox" v-model="hobbies" value="排球">排球
+    <br>{{hobbies}}
+    <br>
+    <select name="aaa" id="" v-model="fruit">
+        <option value="苹果">苹果</option>
+        <option value="香蕉">香蕉</option>
+        <option value="火龙果">火龙果</option>
+    </select>
+    <br>{{fruit}}
+</div>
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data:{
+            message: "sdfds",
+            messageLazy: '',
+            sex: "0",
+            isAgree: false,
+            hobbies: [],
+            fruit:'香蕉',
+            orignalFruits:['苹果','香蕉','火龙果'],
+            age:0,
+            messageTrim:''
+        }
+    })
+</script>
