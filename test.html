@@ -57,9 +57,31 @@
     <button v-on:click="add">+</button>
     <!-- @click为语法糖，就是一些简写而已 -->
     <button @click="sub">-</button>
+    <!-- 不传参数时，默认会传一个mouseEvent对象 -->
+    <button @click="btnClick1">按钮1</button>
+    <!-- 手动传入事件参数固定用$event -->
+    <button @click="btnClick2(222,$event)">按钮2</button>
 </div>
 <script src="vue.js"></script>
 <script>
+    const name = 'why'
+    const age =18
+
+    // ES5写法
+    const obj1 = {
+        name: name,
+        age: age
+    }
+    console.log(obj1)
+
+    // ES6写法
+    const obj2 = {
+        name,
+        age
+    }
+    console.log(obj2)
+
+
 const vue = new Vue({
     el: "#app",
     data: {
@@ -124,11 +146,18 @@ const vue = new Vue({
             // }
             return {active:this.forData[i]};
         },
-        itemClick:function(i){
+        itemClick1:function(i){
             // if(i !=0 ){
                 // this.forData[i] = "true";
                 this.selected = i;
             // }
+        },
+        btnClick1: function(abc){
+            console.log(abc)
+        },
+        btnClick2: function(abc, evnet){
+            console.log(abc)
+            console.log(evnet)
         }
     },
     beforeCreate:function(){
@@ -143,3 +172,4 @@ const vue = new Vue({
     }
 })
 </script>
+console.log(abc)
