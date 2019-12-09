@@ -2,6 +2,7 @@
     <cpn></cpn>
     <cpn></cpn>
     <cpn2></cpn2>
+    <cpn3></cpn3>
 </div>
 <script src="vue.js"></script>
 <script>
@@ -16,12 +17,27 @@
         template: `<div>
             <h2>我是标题222</h2>
             <p>我是内容2222</p>
-        </div>`
+            <cpn1></cpn1>
+        </div>`,
+        // 子组件
+        components:{
+            cpn1:cpnC
+        }
     })
 
     // 注册组件（全局组件）
     Vue.component('cpn',cpnC)
 
+    // 语法糖
+    Vue.component('cpn3', {
+        template: `
+        <div>
+            <h2>我是标题333</h2>
+            <p>我是内容333</p>
+            <cpn1></cpn1>
+        </div>
+        `
+    })
     new Vue({
         el:'#app',
         // 局部组件
