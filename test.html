@@ -61,6 +61,29 @@
     <button @click="btnClick1">按钮1</button>
     <!-- 手动传入事件参数固定用$event -->
     <button @click="btnClick2(222,$event)">按钮2</button>
+    <!-- 阻止事件的冒泡传递 相当于以前js的event.stopPropagation() -->
+    <!-- 阻止默认事件 @click.prevent 相当于以前js的event.stopDefault() -->
+    <div @click="btnClick1('div click')">
+        <button @click.stop="btnClick1('btn3 click')">按钮3</button>
+        <input @keyup.enter="btnClick1('enter down')">回车事件监听
+        <button @click.once="btnClick1('once click')">按钮只点击一次</button>
+        <button v-if="isShow">按钮sfdsf</button>
+        <button v-else>isShow为false时显示</button>
+    </div>
+    <!-- 条件很多时不推荐下面的写法，用计算属性 -->
+    <h2 v-if="score >=90">优秀</h2>
+    <h2 v-else-if="score >=80">良好</h2>
+    <h2 v-else-if="score >=60">及格</h2>
+    <h2 v-else>不及格</h2>
+    <span v-if="isUserLogin">
+        <label for="userLogin">用户登录</label>
+        <input id="userLogin" type="text" placeholder="请输入用户名">
+    </span>
+    <span v-else>
+        <label for="mailLogin">邮箱登录</label>
+        <input id="mailLogin" type="text" placeholder="请输入邮箱">
+    </span>
+    <button @click="isUserLogin=!isUserLogin">切换</button>
 </div>
 <script src="vue.js"></script>
 <script>
@@ -107,7 +130,10 @@ const vue = new Vue({
             {id:1,name:"name1",price:110},
             {id:1,name:"name1",price:99},
             {id:1,name:"name1",price:58}
-        ]
+        ],
+        isShow: true,
+        score: 99,
+        isUserLogin: true
     },
     computed:{
         fullName: function(){
