@@ -86,6 +86,21 @@
     <!-- 默认点切换时input框里值没有清空，因为vue底层里虚拟dom，复用了input -->
     <!-- 解决方法：加上key属性，值不同时就不会复用input -->
     <button @click="isUserLogin=!isUserLogin">切换</button>
+    <!-- v-if和v-show的区别：v-if整个元素都不显示，v-show会显示，只不过设为了display:none -->
+    <!-- 如果显示与否切换很频繁，用v-show，如果只一次，用v-if -->
+    
+    <ul>
+        <!-- 遍历数组 -->
+        <li v-for="(item, i) in books">
+            第{{i+1}}个<br>
+            <span v-for="(val, key) in item">{{key}}-{{val}}<br></span>
+        </li>
+    </ul>
+    <ul>
+        <!-- 加上:key后，往数组里插入元素时效率高 -->
+        <li v-for="item in mv" :key="item"> {{item}}</li>
+        <button @click="arrayModify">数组操作</button>
+    </ul>
 </div>
 <script src="vue.js"></script>
 <script>
@@ -130,8 +145,8 @@ const vue = new Vue({
         finalColor:"green",
         books:[
             {id:1,name:"name1",price:110},
-            {id:1,name:"name1",price:99},
-            {id:1,name:"name1",price:58}
+            {id:1,name:"name2",price:99},
+            {id:1,name:"name3",price:58}
         ],
         isShow: true,
         score: 99,
@@ -186,6 +201,36 @@ const vue = new Vue({
         btnClick2: function(abc, evnet){
             console.log(abc)
             console.log(evnet)
+        },
+        arrayModify: function() {
+            // 在数组最后添加元素
+            // this.mv.push("bbbbb")
+            // 删除数组最后一个元素
+            // this.mv.pop()
+            // 删除数组中的第一个元素
+            // this.mv.shift()
+            // 在数组最前面添加元素
+            // this.mv.unshift("afsdsfdsf","324234")
+            // 在数组中插入某个元素,
+            // 参数1：下标
+            // 参数2：如果是删除,表示删除几个元素，如果是增加,则为0
+            // 参数3：如果是删除，则把该参数里的数据替换，如果是增加，则把该参数里的数组增加
+            // this.mv.splice(2,0,'sdfsfd','324234')
+
+            // this.mv.sort()
+            // 反转
+            // this.mv.reverse()
+
+            // 以上操作都是响应式的
+
+            // 注意，下面的操作不是响应式的
+            // this.mv[0]= 'sdfsd32432'
+            // 解决方法一：用splice
+            // this.mv.splice(0,1,'sdfsdf234324')
+            // 解决方法二：用Vue.set
+            Vue.set(this.mv, 0, 'sdfsdfwe324')
+
+
         }
     },
     beforeCreate:function(){
