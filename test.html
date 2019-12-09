@@ -77,12 +77,14 @@
     <h2 v-else>不及格</h2>
     <span v-if="isUserLogin">
         <label for="userLogin">用户登录</label>
-        <input id="userLogin" type="text" placeholder="请输入用户名">
+        <input id="userLogin" type="text" placeholder="请输入用户名" key="a1">
     </span>
     <span v-else>
         <label for="mailLogin">邮箱登录</label>
-        <input id="mailLogin" type="text" placeholder="请输入邮箱">
+        <input id="mailLogin" type="text" placeholder="请输入邮箱" key="a2">
     </span>
+    <!-- 默认点切换时input框里值没有清空，因为vue底层里虚拟dom，复用了input -->
+    <!-- 解决方法：加上key属性，值不同时就不会复用input -->
     <button @click="isUserLogin=!isUserLogin">切换</button>
 </div>
 <script src="vue.js"></script>
@@ -198,4 +200,3 @@ const vue = new Vue({
     }
 })
 </script>
-console.log(abc)
