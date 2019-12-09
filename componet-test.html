@@ -3,7 +3,14 @@
     <cpn></cpn>
     <cpn2></cpn2>
     <cpn3></cpn3>
+    <cpn4></cpn4>
 </div>
+<template id='cpn4'>
+    <div>
+        <h2>我是标题444</h2>
+        <p>我是内容444</p>
+    </div>
+</template>
 <script src="vue.js"></script>
 <script>
     // 创建组件
@@ -37,6 +44,10 @@
             <cpn1></cpn1>
         </div>
         `
+    })
+
+    Vue.component('cpn4',{
+        template:'#cpn4'
     })
     new Vue({
         el:'#app',
