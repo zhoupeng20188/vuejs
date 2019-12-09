@@ -7,8 +7,8 @@
 </div>
 <template id='cpn4'>
     <div>
-        <h2>我是标题444</h2>
-        <p>我是内容444</p>
+        <h2>{{title}}</h2>
+        <p>{{content}}</p>
     </div>
 </template>
 <script src="vue.js"></script>
@@ -47,7 +47,16 @@
     })
 
     Vue.component('cpn4',{
-        template:'#cpn4'
+        template:'#cpn4',
+        // 组件里的data必须是一个函数，
+        // 在返回的对象里写属性
+        // 必须是函数是为了组件间的data不会相互影响
+        data() {
+            return {
+                title:'我是标题4444',
+                content:'我是内容4444'
+            }
+        }
     })
     new Vue({
         el:'#app',
