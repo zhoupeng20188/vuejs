@@ -85,6 +85,9 @@
             btnClick(item){
                 // 向父组件发送事件,使用自定义事件
                 this.$emit('item-click', item)
+                // 通过$parent访问父组件 $root访问vue实例
+                this.$parent.showMessage()
+                this.$root.showMessage()
             },
             showMessage(){
                 console.log("i am cpn5...")
@@ -124,6 +127,9 @@
                 console.log(this.$children)
                 this.$children[5].showMessage()
                 this.$refs.aaa.showMessage()
+            },
+            showMessage(){
+                console.log('i am vue instanse')
             }
         }
     })
