@@ -23,9 +23,10 @@
     <br>{{hobbies}}
     <br>
     <select name="aaa" id="" v-model="fruit">
-        <option value="苹果">苹果</option>
+        <!-- <option value="苹果">苹果</option>
         <option value="香蕉">香蕉</option>
-        <option value="火龙果">火龙果</option>
+        <option value="火龙果">火龙果</option> -->
+        <option v-for="item in orignalFruits">{{item}}</option>
     </select>
     <br>{{fruit}}
 </div>
@@ -40,7 +41,7 @@
             isAgree: false,
             hobbies: [],
             fruit:'香蕉',
-            orignalFruits:['苹果','香蕉','火龙果'],
+            orignalFruits:['苹果','香蕉','火龙果','哈密瓜'],
             age:0,
             messageTrim:''
         }
