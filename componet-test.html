@@ -13,6 +13,14 @@
     <cpn6></cpn6>
     <cpn6><button slot="right">dsfdsf</button></cpn6>
     <cpn6><p slot="center">dsf3we234</p></cpn6>
+    <cpn7>
+        <!-- 使用组件里的data，但替换显示方式 -->
+        <template slot-scope='slot'>
+            <!-- <span v-for="mv in slot.data">{{mv}}-</span> -->
+            <span>{{slot.data.join('-')}}</span>
+        </template>
+    </cpn7>
+    
 </div>
 <template id='cpn4'>
     <div>
@@ -33,6 +41,16 @@
         <slot name="left">我是slot左边默认值</slot>
         <slot name="center">我是slot中间默认值</slot>
         <slot name="right">我是slot右边默认值</slot>
+    </div>
+</template>
+<template id='cpn7'>
+    <div>
+        <!-- slot里面定义:data，在使用slot时可以通过data取到movies -->
+        <slot :data='movies'>
+            <ul>
+                <li v-for='mv in movies'>{{mv}}</li>
+            </ul>
+        </slot>
     </div>
 </template>
 <script src="vue.js"></script>
@@ -108,6 +126,14 @@
     })
     Vue.component('cpn6',{
         template: '#cpn6'
+    })
+    Vue.component('cpn7',{
+        template: '#cpn7',
+        data(){
+            return {
+                movies:['火影','死神','海贼']
+            }
+        }
     })
     new Vue({
         el:'#app',
