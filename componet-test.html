@@ -10,6 +10,9 @@
     @item-click='cpn5Click'
     ref='aaa'></cpn5>
     <button @click="cpnClick">button</button>
+    <cpn6></cpn6>
+    <cpn6><button slot="right">dsfdsf</button></cpn6>
+    <cpn6><p slot="center">dsf3we234</p></cpn6>
 </div>
 <template id='cpn4'>
     <div>
@@ -21,6 +24,15 @@
     <div>
         <button v-for="item in cpn5data" 
         @click="btnClick(item)">{{item.name}}</button>
+    </div>
+</template>
+<template id='cpn6'>
+    <div>
+        <h2>我是cpn6标题</h2>
+        <p>我是cpn6内容</p>
+        <slot name="left">我是slot左边默认值</slot>
+        <slot name="center">我是slot中间默认值</slot>
+        <slot name="right">我是slot右边默认值</slot>
     </div>
 </template>
 <script src="vue.js"></script>
@@ -93,6 +105,9 @@
                 console.log("i am cpn5...")
             }
         }
+    })
+    Vue.component('cpn6',{
+        template: '#cpn6'
     })
     new Vue({
         el:'#app',
