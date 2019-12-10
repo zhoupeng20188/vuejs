@@ -2,7 +2,8 @@
     <cpn></cpn>
     <cpn></cpn>
     <cpn2></cpn2>
-    <cpn3></cpn3>
+    <!-- 父组件向子组件传值 -->
+    <cpn3 :cpn3message='message'></cpn3>
     <cpn4></cpn4>
 </div>
 <template id='cpn4'>
@@ -41,9 +42,12 @@
         <div>
             <h2>我是标题333</h2>
             <p>我是内容333</p>
-            <cpn1></cpn1>
+            <p>{{cpn3message}}</p>
         </div>
-        `
+        `,
+        props: {
+            cpn3message: String
+        }
     })
 
     Vue.component('cpn4',{
@@ -60,6 +64,9 @@
     })
     new Vue({
         el:'#app',
+        data:{
+            message: '我是父组件的message'
+        },
         // 局部组件
         components:{
             cpn2:cpnC2
