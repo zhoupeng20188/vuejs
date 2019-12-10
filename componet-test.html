@@ -6,11 +6,19 @@
     <!-- v-bind不支持驼峰。。可以用- -->
     <cpn3 :cpn3message='message'></cpn3>
     <cpn4></cpn4>
+    <cpn5 :cpn5data='types'
+    @item-click='cpn5Click'></cpn5>
 </div>
 <template id='cpn4'>
     <div>
         <h2>{{title}}</h2>
         <p>{{content}}</p>
+    </div>
+</template>
+<template id='cpn5'>
+    <div>
+        <button v-for="item in cpn5data" 
+        @click="btnClick(item)">{{item.name}}</button>
     </div>
 </template>
 <script src="vue.js"></script>
@@ -63,14 +71,49 @@
             }
         }
     })
+
+    Vue.component('cpn5',{
+        template: '#cpn5',
+        props: {
+            cpn5data:{
+                type:Array
+            }
+        },
+        methods:{
+            btnClick(item){
+                // 向父组件发送事件,使用自定义事件
+                this.$emit('item-click', item)
+            }
+        }
+    })
     new Vue({
         el:'#app',
         data:{
-            message: '我是父组件的message'
+            message: '我是父组件的message',
+            types:[
+                {
+                    id:1, name:'热门推荐'
+                },
+                {
+                    id:2, name:'手机数码'
+                },
+                {
+                    id:3, name:'家用家电'
+                },
+                {
+                    id:4, name:'电脑办公'
+                }
+            ]
         },
         // 局部组件
         components:{
             cpn2:cpnC2
+        },
+        methods:{
+            cpn5Click(item){
+                console.log('父组件监听到子组件事件')
+                console.log(item)
+            }
         }
     })
 </script>
