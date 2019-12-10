@@ -7,7 +7,9 @@
     <cpn3 :cpn3message='message'></cpn3>
     <cpn4></cpn4>
     <cpn5 :cpn5data='types'
-    @item-click='cpn5Click'></cpn5>
+    @item-click='cpn5Click'
+    ref='aaa'></cpn5>
+    <button @click="cpnClick">button</button>
 </div>
 <template id='cpn4'>
     <div>
@@ -83,6 +85,9 @@
             btnClick(item){
                 // 向父组件发送事件,使用自定义事件
                 this.$emit('item-click', item)
+            },
+            showMessage(){
+                console.log("i am cpn5...")
             }
         }
     })
@@ -113,6 +118,12 @@
             cpn5Click(item){
                 console.log('父组件监听到子组件事件')
                 console.log(item)
+            },
+            cpnClick() {
+                // this.$children可以拿到子组件,一般不用children，用refs
+                console.log(this.$children)
+                this.$children[5].showMessage()
+                this.$refs.aaa.showMessage()
             }
         }
     })
